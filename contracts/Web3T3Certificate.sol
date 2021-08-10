@@ -10,7 +10,7 @@ import "@openzeppelin/contracts/utils/cryptography/draft-EIP712.sol";
 
 contract Web3T3Certificate is ERC721, ERC721Enumerable, AccessControl, EIP712 {
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
-    bytes32 private constant TOKEN_CLAIM_TYPE_HASH =
+    bytes32 private constant TOKEN_CLAIM_HASH_STRUCT =
         keccak256(
             "TokenClaim(uint256 tokenId,string tokenUri,uint256 expires)"
         );
@@ -72,7 +72,7 @@ contract Web3T3Certificate is ERC721, ERC721Enumerable, AccessControl, EIP712 {
         bytes32 digest = _hashTypedDataV4(
             keccak256(
                 abi.encode(
-                    TOKEN_CLAIM_TYPE_HASH,
+                    TOKEN_CLAIM_HASH_STRUCT,
                     tokenId,
                     keccak256(abi.encodePacked(tokenUri)),
                     expires
